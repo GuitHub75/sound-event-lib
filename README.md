@@ -31,7 +31,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/eescobar/sound-event-lib")
+            url = uri("https://maven.pkg.github.com/GuitHub75/sound-event-lib")
             credentials {
                 username = providers.gradleProperty("gpr.user").orNull
                     ?: System.getenv("GITHUB_ACTOR")

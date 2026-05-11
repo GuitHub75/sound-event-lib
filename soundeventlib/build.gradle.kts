@@ -62,7 +62,7 @@ afterEvaluate {
                 pom {
                     name = "SoundEventLib"
                     description = "Lightweight Android library for playing sounds in response to named application events."
-                    url = "https://github.com/eescobar/sound-event-lib"
+                    url = "https://github.com/GuitHub75/sound-event-lib"
 
                     licenses {
                         license {
@@ -73,16 +73,16 @@ afterEvaluate {
 
                     developers {
                         developer {
-                            id = "eescobar"
+                            id = "GuitHub75"
                             name = "Erick Escobar"
                             email = "eescobar2500@gmail.com"
                         }
                     }
 
                     scm {
-                        connection = "scm:git:git://github.com/eescobar/sound-event-lib.git"
-                        developerConnection = "scm:git:ssh://github.com/eescobar/sound-event-lib.git"
-                        url = "https://github.com/eescobar/sound-event-lib"
+                        connection = "scm:git:git://github.com/GuitHub75/sound-event-lib.git"
+                        developerConnection = "scm:git:ssh://github.com/GuitHub75/sound-event-lib.git"
+                        url = "https://github.com/GuitHub75/sound-event-lib"
                     }
                 }
             }
@@ -91,7 +91,7 @@ afterEvaluate {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/eescobar/sound-event-lib")
+                url = uri("https://maven.pkg.github.com/GuitHub75/sound-event-lib")
                 credentials {
                     username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String?
                     password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String?
