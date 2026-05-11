@@ -76,7 +76,7 @@ class SoundManagerTest {
         val config = SoundConfig.Builder().build()
         injectInternals(mockPlayer, mockStrategy, config)
 
-        SoundManager.play(SoundEvent.ERROR)
+        SoundManager.play(SoundEvent.custom("UNREGISTERED_EVENT"))
 
         verify(mockStrategy, never()).execute(any(), any(), any())
     }

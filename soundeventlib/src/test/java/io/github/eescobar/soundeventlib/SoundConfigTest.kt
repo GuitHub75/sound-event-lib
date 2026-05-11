@@ -13,7 +13,12 @@ class SoundConfigTest {
         assertTrue(config.enabled)
         assertEquals(1.0f, config.volume, 0.001f)
         assertEquals(PlaybackMode.OVERLAP, config.playbackMode)
-        assertTrue(config.eventMappings.isEmpty())
+        assertEquals(5, config.eventMappings.size)
+        assertTrue(config.eventMappings.containsKey(SoundEvent.SUCCESS))
+        assertTrue(config.eventMappings.containsKey(SoundEvent.ERROR))
+        assertTrue(config.eventMappings.containsKey(SoundEvent.WARNING))
+        assertTrue(config.eventMappings.containsKey(SoundEvent.SCAN_DETECTED))
+        assertTrue(config.eventMappings.containsKey(SoundEvent.NOTIFICATION))
     }
 
     @Test
