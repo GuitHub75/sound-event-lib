@@ -55,8 +55,8 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 from(components["release"])
 
-                groupId = "io.github.eescobar"
-                artifactId = "soundeventlib"
+                groupId = "com.github.GuitHub75"
+                artifactId = "sound-event-lib"
                 version = libs.versions.soundeventlib.get()
 
                 pom {
@@ -84,17 +84,6 @@ afterEvaluate {
                         developerConnection = "scm:git:ssh://github.com/GuitHub75/sound-event-lib.git"
                         url = "https://github.com/GuitHub75/sound-event-lib"
                     }
-                }
-            }
-        }
-
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/GuitHub75/sound-event-lib")
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String?
-                    password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String?
                 }
             }
         }

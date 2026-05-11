@@ -18,43 +18,29 @@ A lightweight, lifecycle-aware Android library for playing sounds in response to
 
 ## Installation
 
-### Option A — GitHub Packages (recommended)
+### Option A — JitPack (recommended)
 
-**Step 1.** Generate a GitHub Personal Access Token with `read:packages` scope at
-`GitHub → Settings → Developer settings → Personal access tokens`.
+No credentials required. JitPack builds directly from GitHub.
 
-**Step 2.** Add the repository to your project's `settings.gradle.kts`:
+**Step 1.** Add JitPack to your project's `settings.gradle.kts`:
 ```kotlin
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/GuitHub75/sound-event-lib")
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull
-                    ?: System.getenv("GITHUB_ACTOR")
-                password = providers.gradleProperty("gpr.key").orNull
-                    ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 ```
 
-**Step 3.** Store your credentials in `~/.gradle/gradle.properties` (never commit this file):
-```properties
-gpr.user=YOUR_GITHUB_USERNAME
-gpr.key=YOUR_GITHUB_TOKEN
-```
-
-**Step 4.** Add the dependency:
+**Step 2.** Add the dependency in your app's `build.gradle.kts`:
 ```kotlin
 dependencies {
-    implementation("io.github.eescobar:soundeventlib:1.0.0")
+    implementation("com.github.GuitHub75:sound-event-lib:v1.0.0")
 }
 ```
+
+That's it — no tokens, no credentials.
 
 ### Option B — AAR file (offline/manual)
 
