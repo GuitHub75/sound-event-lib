@@ -36,7 +36,7 @@ dependencyResolutionManagement {
 **Step 2.** Add the dependency in your app's `build.gradle.kts`:
 ```kotlin
 dependencies {
-    implementation("com.github.GuitHub75:sound-event-lib:v1.0.0")
+    implementation("com.github.GuitHub75:sound-event-lib:v1.1.0")
 }
 ```
 

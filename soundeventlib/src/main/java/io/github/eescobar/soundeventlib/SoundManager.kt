@@ -25,7 +25,11 @@ object SoundManager {
     private var player: SoundPlayer? = null
     private var registry: EventRegistry? = null
     private var strategy: PlaybackStrategy? = null
-    private var config: SoundConfig? = null
+
+    // Mutable runtime state — kept separate so setEnabled/setVolume never
+    // rebuild the config and accidentally reset the loaded sound mappings.
+    private var enabled: Boolean = true
+    private var volume: Float = 1.0f
 
     /**
      * Initializes the manager. Safe to call from Application.onCreate().
@@ -34,7 +38,8 @@ object SoundManager {
     fun init(context: Context, soundConfig: SoundConfig) {
         release()
 
-        config = soundConfig
+        enabled = soundConfig.enabled
+        volume = soundConfig.volume
 
         val soundPlayer = SoundPoolPlayer(context)
         player = soundPlayer
@@ -58,11 +63,9 @@ object SoundManager {
      * Does nothing if sounds are globally disabled or the event is not registered.
      */
     fun play(event: SoundEvent) {
-        val cfg = config ?: return
-        if (!cfg.enabled) return
-
+        if (!enabled) return
         val soundId = registry?.soundIdFor(event) ?: return
-        strategy?.execute(soundId, cfg.volume, player ?: return)
+        strategy?.execute(soundId, volume, player ?: return)
     }
 
     /** Registers an additional event at runtime. Requires [init] to have been called first. */
@@ -73,26 +76,12 @@ object SoundManager {
 
     /** Enables or disables all sound playback without releasing resources. */
     fun setEnabled(enabled: Boolean) {
-        config = config?.let {
-            SoundConfig.Builder()
-                .enabled(enabled)
-                .volume(it.volume)
-                .playbackMode(it.playbackMode)
-                .apply { it.eventMappings.forEach { (e, r) -> addEvent(e, r) } }
-                .build()
-        }
+        this.enabled = enabled
     }
 
     /** Adjusts global playback volume (0.0 – 1.0). */
     fun setVolume(volume: Float) {
-        config = config?.let {
-            SoundConfig.Builder()
-                .enabled(it.enabled)
-                .volume(volume)
-                .playbackMode(it.playbackMode)
-                .apply { it.eventMappings.forEach { (e, r) -> addEvent(e, r) } }
-                .build()
-        }
+        this.volume = volume.coerceIn(0f, 1f)
     }
 
     /** Returns true if the manager has been initialized. */
@@ -109,6 +98,7 @@ object SoundManager {
         player = null
         registry = null
         strategy = null
-        config = null
+        enabled = true
+        volume = 1.0f
     }
 }
